@@ -1,0 +1,21 @@
+uuid: c0819512-7494-4e40-8915-21b21c9a1808
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_author
+    - node.type.alexandrie_book
+id: node.alexandrie_book.field_author
+field_name: field_author
+entity_type: node
+bundle: alexandrie_book
+label: Author
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

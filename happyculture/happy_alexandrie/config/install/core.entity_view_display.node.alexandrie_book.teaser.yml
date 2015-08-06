@@ -1,0 +1,28 @@
+uuid: 755ea97f-eb93-4786-9e05-5e5ff846bcb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.alexandrie_book.body
+    - node.type.alexandrie_book
+  module:
+    - text
+    - user
+id: node.alexandrie_book.teaser
+targetEntityType: node
+bundle: alexandrie_book
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden:
+  field_author: true
+  field_cover: true

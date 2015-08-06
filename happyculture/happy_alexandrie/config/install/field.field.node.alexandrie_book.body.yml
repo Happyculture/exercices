@@ -1,0 +1,22 @@
+uuid: 461ee4f8-769c-4344-814a-74daf29f3519
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.alexandrie_book
+  module:
+    - text
+id: node.alexandrie_book.body
+field_name: body
+entity_type: node
+bundle: alexandrie_book
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

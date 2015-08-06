@@ -1,0 +1,28 @@
+uuid: 9815bca1-0f36-4f45-9b5e-94997e98f908
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.list
+    - field.field.node.alexandrie_book.body
+    - field.field.node.alexandrie_book.field_author
+    - field.field.node.alexandrie_book.field_cover
+    - node.type.alexandrie_book
+  module:
+    - user
+id: node.alexandrie_book.list
+targetEntityType: node
+bundle: alexandrie_book
+mode: list
+content:
+  field_author:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  body: true
+  field_cover: true
+  links: true
