@@ -5,4 +5,4 @@ happy_alexandrie.simple_welcome_controller:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorld'
     _title: 'Welcome Title'
   requirements:
-    _permission: 'access content'
+    _permission: 'access alexandrie library'
