@@ -1,0 +1,5 @@
+name: Happy Alexandrie
+type: module
+description: Reference module with exercices corrections.
+core: 8.x
+package: Happyculture
