@@ -7,6 +7,25 @@ happy_alexandrie.library_information_simple:
   requirements:
     _permission: 'administer site configuration'
 
+# Advanced configuration with group and items
+# Definie the configuration group
+happy_alexandrie.config_library:
+  path: '/admin/config/alexandrie'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Alexandrie library'
+  requirements:
+    _permission: 'access administration pages'
+
+# Add some configuration items
+happy_alexandrie.config_library_information:
+  path: '/admin/config/alexandrie/library-info'
+  defaults:
+    _form: '\Drupal\happy_alexandrie\Form\AlexandrieConfigForm'
+    _title: 'Alexandrie library opening information'
+  requirements:
+    _permission: 'administer site configuration'
+
 # NORMAL ROUTES -------------------------------
 # Displays the welcome message.
 happy_alexandrie.simple_welcome_controller:

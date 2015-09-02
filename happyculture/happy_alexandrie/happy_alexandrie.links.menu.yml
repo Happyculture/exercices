@@ -4,3 +4,27 @@ happy_alexandrie.simple_welcome_link:
   description: 'Visit the library'
   route_name: happy_alexandrie.simple_welcome_controller
   weight: 1
+
+# Basic Configuration items
+happy_alexandrie.library_information:
+  title: 'Alexandrie library opening information'
+  description: 'Set the librairy opening hours.'
+  route_name: happy_alexandrie.library_information_simple
+  parent: system.admin_config_system
+
+# Advanced configuration with group and items
+# Configuration group
+happy_alexandrie.config_library:
+  title: 'Alexandrie library'
+  route_name: happy_alexandrie.config_library
+  parent: system.admin_config
+  description: 'Alexandrie library general configuration.'
+  weight: 0
+
+# Configuration items
+# Library information.
+happy_alexandrie.config_library_information:
+  title: 'Alexandrie library opening information'
+  description: 'Set the librairy opening hours.'
+  route_name: happy_alexandrie.config_library_information
+  parent: happy_alexandrie.config_library
