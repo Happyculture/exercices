@@ -1,3 +1,13 @@
+# Basic configuration page
+happy_alexandrie.library_information_simple:
+  path: '/admin/config/system/library-info'
+  defaults:
+    _form: '\Drupal\happy_alexandrie\Form\AlexandrieConfigForm'
+    _title: 'Alexandrie library opening information'
+  requirements:
+    _permission: 'administer site configuration'
+
+# NORMAL ROUTES -------------------------------
 # Displays the welcome message.
 happy_alexandrie.simple_welcome_controller:
   path: '/welcome'
