@@ -1,0 +1,6 @@
+happy_alexandrie.simple_welcome_controller:
+  title: 'Visit the library'
+  menu_name: tools
+  description: 'Visit the library'
+  route_name: happy_alexandrie.simple_welcome_controller
+  weight: 1
