@@ -1,0 +1,8 @@
+# Displays the welcome message.
+happy_alexandrie.simple_welcome_controller:
+  path: '/welcome'
+  defaults:
+    _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorld'
+    _title: 'Welcome Title'
+  requirements:
+    _permission: 'access content'
