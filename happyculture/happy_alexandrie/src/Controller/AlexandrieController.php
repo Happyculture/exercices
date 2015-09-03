@@ -8,6 +8,7 @@
 namespace Drupal\happy_alexandrie\Controller;
 
 use Drupal\Core\Entity\EntityManager;
+use Drupal\Core\Entity\EntityViewModeInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -49,7 +50,7 @@ class AlexandrieController extends ControllerBase {
    * @return string
    *   Return "Hello world!" string.
    */
-  public function helloWorld() {
+  public function helloWorld(EntityViewModeInterface $viewmode) {
     $content = [
       '#type' => 'markup',
       '#markup' => $this->t('Hello world bitch!')
@@ -77,9 +78,13 @@ class AlexandrieController extends ControllerBase {
       $storage = $this->entity_manager->getStorage('node');
       // Now we can load the entities.
       $nodes = $storage->loadMultiple($nids);
+
+      list($entity_type, $viewmode_name) = explode('.', $viewmode->getOriginalId());
       // Get the EntityViewBuilder instance.
       $render_controller = $this->entity_manager->getViewBuilder('node');
-      $content[] = $render_controller->viewMultiple($nodes, 'list');
+      $build = $render_controller->viewMultiple($nodes, $viewmode_name);
+      $build['#markup'] = $this->t('Happy Query by view mode: @label', array('@label' => $viewmode->label()));
+      $content[] = $build;
     }
     else {
       $content[] = array(
