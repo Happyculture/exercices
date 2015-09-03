@@ -7,9 +7,42 @@
 
 namespace Drupal\happy_alexandrie\Controller;
 
+use Drupal\Core\Entity\EntityManager;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\Query\QueryFactory;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class AlexandrieController extends ControllerBase {
+
+  /**
+   * The query factory to create entity queries.
+   *
+   * @var \Drupal\Core\Entity\Query\QueryFactory
+   */
+  public $query_factory;
+
+  /**
+   * The entity manager.
+   *
+   * @var \Drupal\Core\Entity\EntityManager
+   */
+  public $entity_manager;
+
+  public function __construct(QueryFactory $queryFactory, EntityManager $entityManager) {
+    $this->query_factory = $queryFactory;
+    $this->entity_manager = $entityManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity.query'),
+      $container->get('entity.manager')
+    );
+  }
+
   /**
    * Say hello to the world.
    *
@@ -19,8 +52,41 @@ class AlexandrieController extends ControllerBase {
   public function helloWorld() {
     $content = [
       '#type' => 'markup',
-      '#markup' => $this->t('Hello world!')
+      '#markup' => $this->t('Hello world bitch!')
     ];
+
+    // Second version displaying the opening hours of the library.
+    $opening_hours = $this->config('happy_alexandrie.library_config')->get('opening_hours');
+    if (!empty($opening_hours)) {
+      $content = [
+        '#markup' => $this->t('<p>Greetings dear adventurer!</p><p>Opening hours:<br />@opening_hours</p>', array('@opening_hours' => $opening_hours)),
+      ];
+    }
+
+    // Query against our entities.
+    $query = $this->query_factory->get('node')
+      ->condition('status', 1)
+      ->condition('type', 'alexandrie_book')
+      ->condition('changed', REQUEST_TIME, '<')
+      ->range(0, 5);
+
+    $nids = $query->execute();
+
+    if ($nids) {
+      // Load the storage manager of our entity.
+      $storage = $this->entity_manager->getStorage('node');
+      // Now we can load the entities.
+      $nodes = $storage->loadMultiple($nids);
+      // Get the EntityViewBuilder instance.
+      $render_controller = $this->entity_manager->getViewBuilder('node');
+      $content[] = $render_controller->viewMultiple($nodes, 'list');
+    }
+    else {
+      $content[] = array(
+        '#markup' => $this->t('No result')
+      );
+    }
+
     return $content;
   }
 }
