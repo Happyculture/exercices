@@ -18,7 +18,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "remote_cover",
  *   label = @Translation("Remote cover"),
  *   field_types = {
- *     "string"
+ *     "string",
+ *     "isbn"
+ *   },
+ *   quickedit = {
+ *     "editor" = "plain_text"
  *   }
  * )
  */
