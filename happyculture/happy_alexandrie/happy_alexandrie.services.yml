@@ -1,0 +1,5 @@
+services:
+  # This declaration is used in the exercise about services. It become useless once
+  # the RemoteCover Plugin type is created.
+  happy_alexandrie.get_cover_service:
+    class: Drupal\happy_alexandrie\Service\GetCoverService
