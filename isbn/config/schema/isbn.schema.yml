@@ -1,0 +1,35 @@
+# Schema for the configuration files of the Isbn module.
+
+field.formatter.settings.isbn:
+  type: mapping
+  label: 'Isbn format settings'
+  mapping:
+    separated_display:
+      type: boolean
+      label: 'Separator use in display'
+
+field.widget.settings.isbn_default:
+  type: mapping
+  label: 'Isbn format settings'
+  mapping:
+    placeholder_isbn_10:
+      type: string
+      label: 'Placeholder for ISBN 10'
+    placeholder_isbn_13:
+      type: string
+      label: 'Placeholder for ISBN 13'
+
+field.storage_settings.isbn:
+  type: mapping
+  label: 'Isbn settings'
+
+field.value.isbn:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    isbn_13:
+      type: string
+      label: 'ISBN-13'
+    isbn_10:
+      type: string
+      label: 'ISBN-10'
