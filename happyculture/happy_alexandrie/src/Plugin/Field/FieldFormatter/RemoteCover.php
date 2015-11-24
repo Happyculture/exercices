@@ -7,7 +7,6 @@
 namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\Field\Annotation\FieldFormatter;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 
@@ -51,7 +50,7 @@ class RemoteCover extends FormatterBase {
         // Part calling a theme function.
         $build[$delta] = array(
           '#theme' => 'happy_cover',
-          '#cover_url' => $item->undashed_value,
+          '#cover_url' => new FormattableMarkup('http://covers.openlibrary.org/b/isbn/@undashed_isbn-L.jpg', ['@undashed_isbn' => $item->undashed_value]),
           '#cover_title' => $items->getEntity()->label(),
         );
       }
