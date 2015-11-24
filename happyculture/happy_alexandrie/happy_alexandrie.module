@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Contains happy_alexandrie.module
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function happy_alexandrie_theme() {
+  $theme = [];
+
+  $theme['happy_cover'] = array(
+    'variables' => array('cover_url' => '', 'cover_title' => ''),
+    'template' => 'happy-cover',
+  );
+
+  return $theme;
+}

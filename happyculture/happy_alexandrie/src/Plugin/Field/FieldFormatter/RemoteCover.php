@@ -46,14 +46,15 @@ class RemoteCover extends FormatterBase {
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $build = [];
 
-    foreach ($items as $item) {
-      $cover = new FormattableMarkup('@isbn<br /><img src="http://covers.openlibrary.org/b/isbn/@undashed_isbn-L.jpg" alt="" />', [
-        '@isbn' => $item->value,
-        '@undashed_isbn' => $item->undashed_value,
-      ]);
-      $build[] = [
-        '#markup' => $cover,
-      ];
+    foreach ($items as $delta => $item) {
+      if ($item->value) {
+        // Part calling a theme function.
+        $build[$delta] = array(
+          '#theme' => 'happy_cover',
+          '#cover_url' => $item->undashed_value,
+          '#cover_title' => $items->getEntity()->label(),
+        );
+      }
     }
 
     return $build;
