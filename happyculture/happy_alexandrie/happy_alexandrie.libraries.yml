@@ -1,0 +1,10 @@
+local-favorite:
+  version: 1.x
+  css:
+    theme:
+      css/local-favorite.css: {}
+  js:
+    js/local-favorite.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
