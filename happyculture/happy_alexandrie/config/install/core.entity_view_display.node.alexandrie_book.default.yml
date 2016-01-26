@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.node.alexandrie_book.body
     - field.field.node.alexandrie_book.field_author
-    - field.field.node.alexandrie_book.field_cover
     - field.field.node.alexandrie_book.field_isbn
     - node.type.alexandrie_book
   module:
@@ -30,14 +29,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-  field_cover:
-    weight: 102
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
   field_isbn:
     weight: 104
     label: above

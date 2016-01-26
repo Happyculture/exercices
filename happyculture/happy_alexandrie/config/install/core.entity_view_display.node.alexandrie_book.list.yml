@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.list
     - field.field.node.alexandrie_book.body
     - field.field.node.alexandrie_book.field_author
-    - field.field.node.alexandrie_book.field_cover
     - node.type.alexandrie_book
   module:
     - user
@@ -24,5 +23,4 @@ content:
     type: string
 hidden:
   body: true
-  field_cover: true
   links: true

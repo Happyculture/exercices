@@ -25,4 +25,3 @@ content:
     weight: 100
 hidden:
   field_author: true
-  field_cover: true
