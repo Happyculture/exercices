@@ -7,7 +7,7 @@
 
 namespace Drupal\happy_alexandrie\Controller;
 
-use Drupal\Core\Entity\EntityManager;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityViewModeInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\Query\QueryFactory;
@@ -25,13 +25,13 @@ class AlexandrieController extends ControllerBase {
   /**
    * The entity manager.
    *
-   * @var \Drupal\Core\Entity\EntityManager
+   * @var \Drupal\Core\Entity\EntityTypeManager
    */
-  public $entity_manager;
+  public $entity_type_manager;
 
-  public function __construct(QueryFactory $queryFactory, EntityManager $entityManager) {
+  public function __construct(QueryFactory $queryFactory, EntityTypeManager $entityTypeManager) {
     $this->query_factory = $queryFactory;
-    $this->entity_manager = $entityManager;
+    $this->entity_type_manager = $entityTypeManager;
   }
 
   /**
@@ -40,7 +40,7 @@ class AlexandrieController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity.query'),
-      $container->get('entity.manager')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -75,13 +75,13 @@ class AlexandrieController extends ControllerBase {
 
     if ($nids) {
       // Load the storage manager of our entity.
-      $storage = $this->entity_manager->getStorage('node');
+      $storage = $this->entity_type_manager->getStorage('node');
       // Now we can load the entities.
       $nodes = $storage->loadMultiple($nids);
 
       list($entity_type, $viewmode_name) = explode('.', $viewmode->getOriginalId());
       // Get the EntityViewBuilder instance.
-      $render_controller = $this->entity_manager->getViewBuilder('node');
+      $render_controller = $this->entity_type_manager->getViewBuilder('node');
       $build = $render_controller->viewMultiple($nodes, $viewmode_name);
       $build['#markup'] = $this->t('Happy Query by view mode: @label', array('@label' => $viewmode->label()));
       $content[] = $build;
