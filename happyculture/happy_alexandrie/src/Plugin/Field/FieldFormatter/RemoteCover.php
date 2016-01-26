@@ -23,6 +23,13 @@ use Drupal\Core\Field\FormatterBase;
 class RemoteCover extends FormatterBase {
 
   /**
+   * Value of the ISBN without '-' char.
+   *
+   * @var string
+   */
+  protected $undashed_value;
+
+  /**
    * {@inheritdoc}
    */
   public function prepareView(array $entities_items) {
