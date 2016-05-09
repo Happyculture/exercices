@@ -1,0 +1,5 @@
+name: Author Entity
+type: module
+description: Author custom entity
+core: 8.x
+package: Happyculture

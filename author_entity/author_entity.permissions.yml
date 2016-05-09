@@ -1,0 +1,19 @@
+add author entities:
+  title: 'Create new Author entities'
+
+administer author entities:
+  title: 'Administer Author entities'
+  description: 'Allow to access the administration form to configure Author entities.'
+  restrict access: true
+
+delete author entities:
+  title: 'Delete Author entities'
+
+edit author entities:
+  title: 'Edit Author entities'
+
+view published author entities:
+  title: 'View published Author entities'
+
+view unpublished author entities:
+  title: 'View unpublished Author entities'

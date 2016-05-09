@@ -1,0 +1,22 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: elebris
+ * Date: 27/04/2016
+ * Time: 09:55
+ */
+
+/**
+ *  Implements hook_theme().
+ */
+function author_entity_theme($existing, $type, $theme, $path)
+{
+    return [
+        'author_entity' => [
+            'render element' => 'elements',
+            'file' => 'author_entity.page.inc',
+            'template' => 'author_entity',
+        ],
+    ];
+
+}

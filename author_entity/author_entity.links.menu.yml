@@ -1,0 +1,13 @@
+# Author menu items definition
+entity.author_entity.collection:
+  title: 'Author list'
+  route_name: entity.author_entity.collection
+  description: 'List Author entities'
+  parent: system.admin_structure
+  weight: 100
+
+author_entity.admin.structure.settings:
+  title: Author settings
+  description: 'Configure Author entities'
+  route_name: author_entity.settings
+  parent: system.admin_structure
