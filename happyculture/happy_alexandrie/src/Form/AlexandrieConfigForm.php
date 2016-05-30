@@ -25,9 +25,7 @@ class AlexandrieConfigForm extends ConfigFormBase {
    * data should be exported. It will be the filename of the exported data.
    */
   public function getEditableConfigNames() {
-    return array(
-      'happy_alexandrie.library_config'
-    );
+    return ['happy_alexandrie.library_config'];
   }
 
   /**

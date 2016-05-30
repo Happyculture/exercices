@@ -17,9 +17,10 @@ class AlexandrieController extends ControllerBase {
    *   Return "Hello world!" string.
    */
   public function helloWorld() {
+    $hours = $this->config('happy_alexandrie.library_config')->get('opening_hours');
     $content = [
       '#type' => 'markup',
-      '#markup' => $this->t('Hello world!')
+      '#markup' => $this->t('Hello world! Opening hours: @opening_hours', ['@opening_hours' => $hours])
     ];
     return $content;
   }
