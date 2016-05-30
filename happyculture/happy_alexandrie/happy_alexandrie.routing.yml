@@ -14,5 +14,5 @@ happy_alexandrie.welcome_timelimited_access:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorld'
     _title: 'Welcome'
   requirements:
-    _custom_access: '\Drupal\happy_alexandrie\Controller\AlexandrieAccess::accessLibrary'
+    _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
     _permission: 'access alexandrie library'
