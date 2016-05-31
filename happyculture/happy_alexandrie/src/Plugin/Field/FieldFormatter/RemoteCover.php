@@ -47,12 +47,10 @@ class RemoteCover extends FormatterBase {
     $build = [];
 
     foreach ($items as $item) {
-      $cover = new FormattableMarkup('@isbn<br /><img src="http://covers.openlibrary.org/b/isbn/@undashed_isbn-L.jpg" alt="" />', [
-        '@isbn' => $item->value,
-        '@undashed_isbn' => $item->undashed_value,
-      ]);
+      $cover = 'http://covers.openlibrary.org/b/isbn/' . $item->undashed_value . '-L.jpg';
       $build[] = [
-        '#markup' => $cover,
+        '#theme' => 'image',
+        '#uri' => $cover,
       ];
     }
 
