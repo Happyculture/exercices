@@ -51,7 +51,6 @@ class RemoteCover extends FormatterBase {
         $build[$delta] = array(
           '#theme' => 'happy_cover',
           '#cover_isbn' => $item->undashed_value,
-          '#cover_size' => 'M',
           '#cover_title' => $items->getEntity()->label(),
         );
       }
