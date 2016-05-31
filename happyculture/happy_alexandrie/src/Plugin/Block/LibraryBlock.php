@@ -30,12 +30,12 @@ class LibraryBlock extends BlockBase {
   public function build() {
     $options = array(
       'attributes' => array(
-        'title' => $this->link_label(),
+        'title' => $this->configuration['link_title'],
       ),
     );
     return array(
       '#type' => 'link',
-      '#title' => $this->link_label(),
+      '#title' => $this->configuration['link_title'],
       '#url' => new Url('happy_alexandrie.query_welcome_controller', array(), $options),
       '#prefix' => '<p>',
       '#suffix' => '</p>',
@@ -53,7 +53,7 @@ class LibraryBlock extends BlockBase {
     return AccessResultAllowed::allowedIfHasPermission($account, 'access alexandrie library');
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
