@@ -30,7 +30,7 @@ class GetCoverService implements GetCoverServiceInterface {
    * GetCoverService constructor.
    */
   public function __construct() {
-    $this->$webservice_url = 'http://covers.openlibrary.org/b/isbn/@param-L.jpg';
+    $this->webservice_url = 'http://covers.openlibrary.org/b/isbn/@param-L.jpg';
   }
 
   /**
@@ -42,7 +42,7 @@ class GetCoverService implements GetCoverServiceInterface {
    *   An url of the image cover.
    */
   public function getCover($param) {
-    $url = new FormattableMarkup($this->$webservice_url, array('@param' => $param));
+    $url = new FormattableMarkup($this->webservice_url, array('@param' => $param));
     return  Url::fromUri($url);
   }
 }
