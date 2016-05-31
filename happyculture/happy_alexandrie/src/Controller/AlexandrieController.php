@@ -50,7 +50,7 @@ class AlexandrieController extends ControllerBase {
    * @return string
    *   Return "Hello world!" string.
    */
-  public function helloWorld(EntityViewModeInterface $viewmode) {
+  public function helloWorld(EntityViewModeInterface $entity_view_mode) {
     $content = [
       '#type' => 'markup',
       '#markup' => $this->t('Hello world bitch!')
@@ -67,7 +67,7 @@ class AlexandrieController extends ControllerBase {
     // Query against our entities.
     $query = $this->query_factory->get('node')
       ->condition('status', 1)
-      ->condition('type', 'alexandrie_book')
+      ->condition('type', 'livre')
       ->condition('changed', REQUEST_TIME, '<')
       ->range(0, 5);
 
@@ -79,11 +79,11 @@ class AlexandrieController extends ControllerBase {
       // Now we can load the entities.
       $nodes = $storage->loadMultiple($nids);
 
-      list($entity_type, $viewmode_name) = explode('.', $viewmode->getOriginalId());
+      list($entity_type, $viewmode_name) = explode('.', $entity_view_mode->getOriginalId());
       // Get the EntityViewBuilder instance.
       $render_controller = $this->entity_type_manager->getViewBuilder('node');
       $build = $render_controller->viewMultiple($nodes, $viewmode_name);
-      $build['#markup'] = $this->t('Happy Query by view mode: @label', array('@label' => $viewmode->label()));
+      $build['#markup'] = $this->t('Happy Query by view mode: @label', array('@label' => $entity_view_mode->label()));
       $content[] = $build;
     }
     else {

@@ -30,19 +30,20 @@ class LibraryBlock extends BlockBase {
   public function build() {
     $options = array(
       'attributes' => array(
-        'title' => $this->link_label(),
+        'title' => $this->t('Visit the library'),
       ),
     );
     return array(
       '#type' => 'link',
-      '#title' => $this->link_label(),
+      '#title' => $this->t('Visit the library'),
       '#url' => new Url('happy_alexandrie.query_welcome_controller', array(), $options),
       '#prefix' => '<p>',
       '#suffix' => '</p>',
     );
     // Other ways to do it. Directly using the link element.
     return [
-      Link::createFromRoute($this->configuration['link_title'], 'happy_alexandrie.query_welcome_controller')->toRenderable(),
+      Link::createFromRoute($this->configuration['link_title'],
+        'happy_alexandrie.query_welcome_controller')->toRenderable(),
     ];
   }
 
@@ -79,6 +80,6 @@ class LibraryBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->setConfigurationValue('link_label', $form_state->getValue('link_label'));
+    $this->setConfigurationValue('link_title', $form_state->getValue('link_label'));
   }
 }

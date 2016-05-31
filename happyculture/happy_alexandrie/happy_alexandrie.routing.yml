@@ -29,17 +29,18 @@ happy_alexandrie.config_library_information:
 # NORMAL ROUTES -------------------------------
 # Displays the welcome message.
 happy_alexandrie.simple_welcome_controller:
-  path: '/welcome/{viewmode}'
+  path: '/welcome/{entity_view_mode}'
   defaults:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorld'
     _title: 'Welcome Title'
-    viewmode: 'node.teaser'
+    entity_view_mode: 'node.teaser'
   requirements:
     _permission: 'access alexandrie library'
-  options:
-    parameters:
-      viewmode:
-        type: entity:entity_view_mode
+  # Optional to map a parameter to a type.
+  # options:
+    # parameters:
+      # viewmode:
+        # type: entity:entity_view_mode
 
 # Displays the welcome message if you access during the opening hours.
 happy_alexandrie.welcome_timelimited_access:
