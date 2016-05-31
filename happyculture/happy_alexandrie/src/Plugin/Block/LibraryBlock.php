@@ -36,7 +36,7 @@ class LibraryBlock extends BlockBase {
     return array(
       '#type' => 'link',
       '#title' => $this->configuration['link_title'],
-      '#url' => new Url('happy_alexandrie.query_welcome_controller', array(), $options),
+      '#url' => new Url('happy_alexandrie.simple_welcome_controller', array(), $options),
       '#prefix' => '<p>',
       '#suffix' => '</p>',
     );
