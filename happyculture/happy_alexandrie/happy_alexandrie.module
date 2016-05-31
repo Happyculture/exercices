@@ -12,7 +12,11 @@ function happy_alexandrie_theme() {
   $theme = [];
 
   $theme['happy_cover'] = array(
-    'variables' => array('cover_url' => '', 'cover_title' => ''),
+    'variables' => array(
+      'cover_isbn' => '',
+      'cover_size' => 'M',
+      'cover_title' => ''
+    ),
     'template' => 'happy-cover',
   );
 

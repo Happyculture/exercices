@@ -50,7 +50,8 @@ class RemoteCover extends FormatterBase {
         // Part calling a theme function.
         $build[$delta] = array(
           '#theme' => 'happy_cover',
-          '#cover_url' => new FormattableMarkup('http://covers.openlibrary.org/b/isbn/@undashed_isbn-L.jpg', ['@undashed_isbn' => $item->undashed_value]),
+          '#cover_isbn' => $item->undashed_value,
+          '#cover_size' => 'M',
           '#cover_title' => $items->getEntity()->label(),
         );
       }
