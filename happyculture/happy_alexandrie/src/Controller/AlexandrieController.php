@@ -67,7 +67,7 @@ class AlexandrieController extends ControllerBase {
     // Query against our entities.
     $query = $this->query_factory->get('node')
       ->condition('status', 1)
-      ->condition('type', 'alexandrie_book')
+      ->condition('type', 'livre')
       ->condition('changed', REQUEST_TIME, '<')
       ->range(0, 5);
 
