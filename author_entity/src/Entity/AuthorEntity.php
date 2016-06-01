@@ -246,13 +246,17 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
     $fields['birth_date'] = BaseFieldDefinition::create('datetime')
         ->setLabel(t('Birth date'))
         ->setDefaultValue('')
+        ->setSetting('datetime_type', 'date')
         ->setDisplayOptions('view', array(
             'label' => 'above',
-            'type' => 'datetime',
+            'type' => 'datetime_default',
+            'settings' => array(
+              'format_type' => 'html_date',
+            ),
             'weight' => -2,
         ))
         ->setDisplayOptions('form', array(
-            'type' => 'datetime',
+            'type' => 'date',
             'weight' => -2,
         ))
         ->setDisplayConfigurable('form', TRUE)
@@ -261,13 +265,17 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
     $fields['death_date'] = BaseFieldDefinition::create('datetime')
         ->setLabel(t('Death date'))
         ->setDefaultValue('')
+        ->setSetting('datetime_type', 'date')
         ->setDisplayOptions('view', array(
             'label' => 'above',
-            'type' => 'datetime',
+            'type' => 'datetime_default',
+            'settings' => array(
+              'format_type' => 'html_date',
+            ),
             'weight' => -1,
         ))
         ->setDisplayOptions('form', array(
-            'type' => 'datetime',
+            'type' => 'date',
             'weight' => -1,
         ))
         ->setDisplayConfigurable('form', TRUE)
