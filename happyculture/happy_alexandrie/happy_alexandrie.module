@@ -67,14 +67,24 @@ function happy_alexandrie_node_view(array &$build, EntityInterface $entity, Enti
  * Implements hook_cron().
  */
 function happy_alexandrie_cron() {
-  $nids = \Drupal::entityQuery('node')
-  ->condition('status', 1)
-  ->condition('type', 'alexandrie_book')
-  ->execute();
 
-  foreach ($nids as $nid) {
-    \Drupal::state()->set('alexandrie.qty.book.' . $nid, rand(1,10));
-    $tag = 'book:' . $nid . ':qty';
-    \Drupal\Core\Cache\Cache::invalidateTags(array($tag));
+  $happy_alexandrie_timestamp = \Drupal::state()->get('happy_alexandrie.day_timestamp', 0);
+
+  if ((REQUEST_TIME - $happy_alexandrie_timestamp) >= 10) {
+    $nids = \Drupal::entityQuery('node')
+    ->condition('status', 1)
+    ->condition('type', 'alexandrie_book')
+    ->execute();
+
+    foreach ($nids as $nid) {
+      $old_value = \Drupal::state()->get('alexandrie.qty.book.' . $nid, 0);
+      $new_value = rand(1,10);
+      \Drupal::state()->set('alexandrie.qty.book.' . $nid, $new_value);
+      $tag = 'book:' . $nid . ':qty';
+      if ($old_value != $new_value) {
+        \Drupal\Core\Cache\Cache::invalidateTags(array($tag));
+      }
+    }
+    \Drupal::state()->set('happy_alexandrie.day_timestamp', REQUEST_TIME);
   }
 }
