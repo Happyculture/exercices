@@ -36,13 +36,13 @@ class LibraryBlock extends BlockBase {
     return array(
       '#type' => 'link',
       '#title' => $this->configuration['link_title'],
-      '#url' => new Url('happy_alexandrie.simple_welcome_controller', array(), $options),
+      '#url' => Url::fromRoute('happy_alexandrie.welcome_timelimited_access', array(), $options),
       '#prefix' => '<p>',
       '#suffix' => '</p>',
     );
     // Other ways to do it. Directly using the link element.
     return [
-      Link::createFromRoute($this->configuration['link_title'], 'happy_alexandrie.query_welcome_controller')->toRenderable(),
+      Link::createFromRoute($this->configuration['link_title'], 'happy_alexandrie.welcome_timelimited_access')->toRenderable(),
     ];
   }
 
