@@ -232,7 +232,7 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
         ))
         ->setDefaultValue('')
         ->setDisplayOptions('view', array(
-            'label' => 'above',
+            'label' => 'hidden',
             'type' => 'string',
             'weight' => -3,
         ))
@@ -256,7 +256,7 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
             'weight' => -2,
         ))
         ->setDisplayOptions('form', array(
-            'type' => 'date',
+            'type' => 'datetime_default',
             'weight' => -2,
         ))
         ->setDisplayConfigurable('form', TRUE)
@@ -275,7 +275,7 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
             'weight' => -1,
         ))
         ->setDisplayOptions('form', array(
-            'type' => 'date',
+            'type' => 'datetime_default',
             'weight' => -1,
         ))
         ->setDisplayConfigurable('form', TRUE)
@@ -290,13 +290,12 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
             'weight' => -1,
         ))
         ->setDisplayOptions('form', array(
-            'type' => 'image',
+            'type' => 'image_image',
             'weight' => -1,
         ))
         ->setDisplayConfigurable('form', TRUE)
         ->setDisplayConfigurable('view', TRUE);
-
-
+    
     return $fields;
   }
 
