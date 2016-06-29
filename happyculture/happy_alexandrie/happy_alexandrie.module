@@ -4,6 +4,7 @@
  * @file
  * Contains happy_alexandrie.module
  */
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 
@@ -70,6 +71,7 @@ function happy_alexandrie_cron() {
 
   $happy_alexandrie_timestamp = \Drupal::state()->get('happy_alexandrie.day_timestamp', 0);
 
+  // Keep the quantities valid for at least 10 seconds.
   if ((REQUEST_TIME - $happy_alexandrie_timestamp) >= 10) {
     $nids = \Drupal::entityQuery('node')
     ->condition('status', 1)
@@ -77,13 +79,9 @@ function happy_alexandrie_cron() {
     ->execute();
 
     foreach ($nids as $nid) {
-      $old_value = \Drupal::state()->get('alexandrie.qty.book.' . $nid, 0);
       $new_value = rand(1,10);
       \Drupal::state()->set('alexandrie.qty.book.' . $nid, $new_value);
-      $tag = 'book:' . $nid . ':qty';
-      if ($old_value != $new_value) {
-        \Drupal\Core\Cache\Cache::invalidateTags(array($tag));
-      }
+      Cache::invalidateTags(array('book:' . $nid . ':qty'));
     }
     \Drupal::state()->set('happy_alexandrie.day_timestamp', REQUEST_TIME);
   }
