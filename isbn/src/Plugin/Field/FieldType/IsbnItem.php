@@ -65,19 +65,6 @@ class IsbnItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
-    $isbns = array(
-      array('isbn_13' => '9785699470594', 'isbn_10' => '569947059X'),
-      array('isbn_13' => '9783827326089', 'isbn_10' => '3827326087'),
-      array('isbn_13' => '9780470429037', 'isbn_10' => '0470429038'),
-      array('isbn_13' => '9780470549674', 'isbn_10' => '047054967X'),
-    );
-    return array_rand($isbns);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function isEmpty() {
     $value = $this->get('isbn_13')->getValue();
     return empty($value);
