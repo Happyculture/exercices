@@ -4,14 +4,13 @@ namespace Drupal\author_entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
-use Drupal\user\EntityOwnerInterface;
 
 /**
  * Provides an interface for defining Author entities.
  *
  * @ingroup author_entity
  */
-interface AuthorEntityInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface {
+interface AuthorEntityInterface extends ContentEntityInterface {
 
   // Add get/set methods for your configuration properties here.
 
@@ -35,23 +34,12 @@ interface AuthorEntityInterface extends ContentEntityInterface, EntityChangedInt
   public function setName($name);
 
   /**
-   * Gets the Author creation timestamp.
+   * Returns the age of the Author.
    *
    * @return int
-   *   Creation timestamp of the Author.
+   *   Returns the age of the author.
    */
-  public function getCreatedTime();
-
-  /**
-   * Sets the Author creation timestamp.
-   *
-   * @param int $timestamp
-   *   The Author creation timestamp.
-   *
-   * @return \Drupal\author_entity\AuthorEntityInterface
-   *   The called Author entity.
-   */
-  public function setCreatedTime($timestamp);
+  public function getAge();
 
   /**
    * Returns the Author published status indicator.

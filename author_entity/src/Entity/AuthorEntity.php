@@ -8,7 +8,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\author_entity\AuthorEntityInterface;
-use Drupal\user\UserInterface;
+use Zend\Stdlib\DateTime;
 
 /**
  * Defines the Author entity.
@@ -62,9 +62,6 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
-    $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
-    );
   }
 
   /**
@@ -79,51 +76,6 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
    */
   public function setName($name) {
     $this->set('name', $name);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setCreatedTime($timestamp) {
-    $this->set('created', $timestamp);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('user_id')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('user_id')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
     return $this;
   }
 
@@ -145,7 +97,25 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
   /**
    * {@inheritdoc}
    */
+  public function getAge() {
+    // Get the Author age.
+    $birth = new DateTime($this->get('birth_date')->value);
+    // Check if the author is dead. Otherwise evaluate is age against today.
+    if ($this->get('death_date')->value) {
+      $death = new DateTime($this->get('death_date')->value);
+    }
+    else {
+      $death = new DateTime();
+    }
+    $age = $birth->diff($death);
+    return $age->format('%y');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+    // Mandatory base fields for Content Entity Types.
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Author entity.'))
@@ -154,7 +124,20 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
       ->setLabel(t('UUID'))
       ->setDescription(t('The UUID of the Author entity.'))
       ->setReadOnly(TRUE);
+    $fields['status'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Publishing status'))
+      ->setDescription(t('A boolean indicating whether the Author is published.'))
+      ->setDefaultValue(TRUE);
+    $fields['langcode'] = BaseFieldDefinition::create('language')
+      ->setLabel(t('Language code'))
+      ->setDescription(t('The language code for the Author entity.'))
+      ->setDisplayOptions('form', array(
+        'type' => 'language_select',
+        'weight' => 10,
+      ))
+      ->setDisplayConfigurable('form', TRUE);
 
+    // Custom attributes.
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The birth name of the Author.'))
@@ -174,28 +157,6 @@ class AuthorEntity extends ContentEntityBase implements AuthorEntityInterface {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-
-    $fields['status'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Publishing status'))
-      ->setDescription(t('A boolean indicating whether the Author is published.'))
-      ->setDefaultValue(TRUE);
-
-    $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language code'))
-      ->setDescription(t('The language code for the Author entity.'))
-      ->setDisplayOptions('form', array(
-        'type' => 'language_select',
-        'weight' => 10,
-      ))
-      ->setDisplayConfigurable('form', TRUE);
-
-    $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('Created'))
-      ->setDescription(t('The time that the entity was created.'));
-
-    $fields['changed'] = BaseFieldDefinition::create('changed')
-      ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the entity was last edited.'));
 
     $fields['pseudonym'] = BaseFieldDefinition::create('string')
         ->setLabel(t('Pseudonym'))
