@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\happy_alexandrie\Plugin\Field\FieldFormatter\RemoteCover.
+ * Contains \Drupal\happy_alexandrie\Plugin\Field\FieldFormatter\RemoteCoverFormatter.
  */
 
 namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
@@ -26,7 +26,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   }
  * )
  */
-class RemoteCover extends FormatterBase implements ContainerFactoryPluginInterface {
+class RemoteCoverFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
 
   /**
    * The get cover service.
