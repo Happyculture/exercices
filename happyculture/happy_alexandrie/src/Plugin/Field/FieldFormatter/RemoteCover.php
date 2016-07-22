@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\happy_alexandrie\Plugin\Field\FieldFormatter\RemoteCover.
+ * Contains \Drupal\happy_alexandrie\Plugin\Field\FieldFormatter\RemoteCoverFormatter.
  */
 
 namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
@@ -20,7 +20,7 @@ use Drupal\Core\Field\FormatterBase;
  *   }
  * )
  */
-class RemoteCover extends FormatterBase {
+class RemoteCoverFormatter extends FormatterBase {
 
   /**
    * Value of the ISBN without '-' char.
