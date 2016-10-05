@@ -46,14 +46,12 @@ class AlexandrieConfigForm extends ConfigFormBase {
       '#title' => 'Opening hour',
       '#description' => 'Days / hours of the library',
       '#default_value' => $this->config('happy_alexandrie.library_config')->get('opening_hour'),
-      '#rows' => 5,
     );
     $form['closing_hour'] = array(
       '#type' => 'textfield',
       '#title' => 'Closing hour',
       '#description' => 'Days / hours of the library',
       '#default_value' => $this->config('happy_alexandrie.library_config')->get('closing_hour'),
-      '#rows' => 5,
     );
     return $form;
   }
