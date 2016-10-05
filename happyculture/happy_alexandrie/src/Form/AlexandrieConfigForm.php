@@ -41,11 +41,18 @@ class AlexandrieConfigForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
 
     // Add our custom form fields.
-    $form['opening_hours'] = array(
-      '#type' => 'textarea',
-      '#title' => 'Opening hours',
+    $form['opening_hour'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Opening hour',
       '#description' => 'Days / hours of the library',
-      '#default_value' => $this->config('happy_alexandrie.library_config')->get('opening_hours'),
+      '#default_value' => $this->config('happy_alexandrie.library_config')->get('opening_hour'),
+      '#rows' => 5,
+    );
+    $form['closing_hour'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Closing hour',
+      '#description' => 'Days / hours of the library',
+      '#default_value' => $this->config('happy_alexandrie.library_config')->get('closing_hour'),
       '#rows' => 5,
     );
     return $form;
@@ -58,7 +65,8 @@ class AlexandrieConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('happy_alexandrie.library_config')
-      ->set('opening_hours', $form_state->getValue('opening_hours'))
+      ->set('opening_hour', $form_state->getValue('opening_hour'))
+      ->set('closing_hour', $form_state->getValue('closing_hour'))
       ->save();
     // Call the parent implementation to inherit from what has been done in it.
     // In our case, display the confirmation message.
