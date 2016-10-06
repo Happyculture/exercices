@@ -23,15 +23,6 @@ function happy_alexandrie_theme() {
 }
 
 /**
- * Implements hook_entity_view_alter().
- */
-function happy_alexandrie_entity_view_alter(&$build, $type) {
-  if (isset($build['#theme']) && $build['#theme'] == 'node') {
-    $build['#attached']['library'][] = 'happy_alexandrie/local-favorite';
-  }
-}
-
-/**
  * Implements hook_entity_extra_field_info().
  */
 function happy_alexandrie_entity_extra_field_info() {
