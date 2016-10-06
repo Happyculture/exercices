@@ -19,7 +19,7 @@ use Drupal\Core\Access\AccessResultAllowed;
  *
  * @Block(
  *   id = "visit_library",
- *   admin_label = @Translation("Visit the library"),
+ *   admin_label = @Translation("Visit the library")
  * )
  */
 class LibraryBlock extends BlockBase {
@@ -37,7 +37,7 @@ class LibraryBlock extends BlockBase {
       'visit_link' => [
         '#type' => 'link',
         '#title' => $this->configuration['link_title'],
-        '#url' => Url::fromRoute('happy_alexandrie.welcome_timelimited_access', array(), $options),
+        '#url' => Url::fromRoute('happy_alexandrie.simple_welcome_controller', array(), $options),
         '#prefix' => '<p>',
         '#suffix' => '</p>',
       ],
@@ -46,7 +46,7 @@ class LibraryBlock extends BlockBase {
     return array(
       'visit_link' => [
         Link::createFromRoute($this->configuration['link_title'],
-          'happy_alexandrie.welcome_timelimited_access')->toRenderable(),
+          'happy_alexandrie.simple_welcome_controller')->toRenderable(),
       ]
     );
   }
