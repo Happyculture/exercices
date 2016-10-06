@@ -18,10 +18,11 @@ interface GetCoverServiceInterface {
   /**
    * Helper function to get a cover.
    *
-   * @param $param
-   *   A parameter used by the service to get the cover.
+   * @param $isbn
+   *   The ISBN of the item we want to retrieve the cover from.
+   *
    * @return string
    *   An url of the image cover.
    */
-  public function getCover($param);
+  public function getCover($isbn);
 }
