@@ -90,7 +90,7 @@ class RemoteCoverFormatter extends FormatterBase implements ContainerFactoryPlug
   public function prepareView(array $entities_items) {
     foreach ($entities_items as $items) {
       foreach ($items as $item) {
-        $item->undashed_value = str_replace('-', '', $item->value);
+        $item->undashed_value = str_replace('-', '', $item->isbn_10);
       }
     }
   }
@@ -102,7 +102,7 @@ class RemoteCoverFormatter extends FormatterBase implements ContainerFactoryPlug
     $build = [];
 
     foreach ($items as $delta => $item) {
-      if ($item->value) {
+      if ($item->getValue()) {
         // Part calling a theme function.
         $build[$delta] = array(
           '#theme' => 'happy_cover',
