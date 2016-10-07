@@ -160,7 +160,7 @@ class RemoteCoverFormatter extends FormatterBase implements ContainerFactoryPlug
   public function viewElements(FieldItemListInterface $items, $langcode = NULL) {
     $elements = array();
     foreach ($items as $delta => $item) {
-      if ($item->value) {
+      if ($item->getValue()) {
         // Part calling a theme function.
         $elements[$delta] = array(
           '#theme' => 'happy_cover',
