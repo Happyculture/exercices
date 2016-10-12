@@ -50,20 +50,55 @@ class AlexandrieController extends ControllerBase {
    * @return string
    *   Return "Hello world!" string.
    */
-  public function helloWorld(EntityViewModeInterface $viewmode) {
+  public function helloWorld() {
+    $opening = $this->config('happy_alexandrie.library_config')->get('opening_hour');
+    $closing = $this->config('happy_alexandrie.library_config')->get('closing_hour');
     $content = [
       '#type' => 'markup',
-      '#markup' => $this->t('Hello world bitch!')
+      '#markup' => $this->t('Hello world! Opening hour: @opening_hour / Closing Hour: @closing_hour', [
+        '@opening_hour' => $opening,
+        '@closing_hour' => $closing
+      ])
     ];
+    return $content;
+  }
 
-    // Second version displaying the opening hours of the library.
-    $opening_hours = $this->config('happy_alexandrie.library_config')->get('opening_hours');
-    if (!empty($opening_hours)) {
-      $content = [
-        '#markup' => $this->t('<p>Greetings dear adventurer!</p><p>Opening hours:<br />@opening_hours</p>', array('@opening_hours' => $opening_hours)),
-      ];
+  /**
+   * List the books in the "list" view mode.
+   */
+  public function booksList() {
+    // Query against our entities.
+    $query = $this->query_factory->get('node')
+      ->condition('status', 1)
+      ->condition('type', 'alexandrie_book')
+      ->condition('changed', REQUEST_TIME, '<')
+      ->range(0, 5);
+
+    $nids = $query->execute();
+
+    if ($nids) {
+      // Load the storage manager of our entity.
+      $storage = $this->entity_type_manager->getStorage('node');
+      // Now we can load the entities.
+      $nodes = $storage->loadMultiple($nids);
+
+      // Get the EntityViewBuilder instance.
+      $render_controller = $this->entity_type_manager->getViewBuilder('node');
+      $build = $render_controller->viewMultiple($nodes, 'list');
+      $content[] = $build;
     }
+    else {
+      $content[] = array(
+        '#markup' => $this->t('No result')
+      );
+    }
+    return $content;
+  }
 
+  /**
+   * List the books in a dynamic view mode.
+   */
+  public function booksListViewMode(EntityViewModeInterface $viewmode) {
     // Query against our entities.
     $query = $this->query_factory->get('node')
       ->condition('status', 1)
@@ -91,7 +126,6 @@ class AlexandrieController extends ControllerBase {
         '#markup' => $this->t('No result')
       );
     }
-
     return $content;
   }
 }
