@@ -52,7 +52,7 @@ happy_alexandrie.books_list:
   path: '/books'
   defaults:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::booksList'
-    _title: 'Welcome Title'
+    _title: 'Books list'
   requirements:
     _permission: 'access alexandrie library'
 
@@ -61,8 +61,8 @@ happy_alexandrie.books_list_view_mode:
   path: '/books/view/{viewmode}'
   defaults:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::booksListViewMode'
-    _title: 'Welcome Title'
-    viewmode: 'node.teaser'
+    _title: 'Books list in a given view mode'
+    viewmode: 'node.list'
   requirements:
     _permission: 'access alexandrie library'
   options:

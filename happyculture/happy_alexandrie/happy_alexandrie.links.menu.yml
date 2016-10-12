@@ -28,3 +28,17 @@ happy_alexandrie.config_library_information:
   description: 'Set the librairy opening hours.'
   route_name: happy_alexandrie.config_library_information
   parent: happy_alexandrie.config_library
+
+happy_alexandrie.books_list:
+  title: 'Books list'
+  menu_name: tools
+  description: 'Books list'
+  route_name: happy_alexandrie.books_list
+  weight: 2
+
+happy_alexandrie.books_list_view_mode:
+  title: 'Books list (view mode)'
+  menu_name: tools
+  description: 'Books list'
+  route_name: happy_alexandrie.books_list_view_mode
+  weight: 3
