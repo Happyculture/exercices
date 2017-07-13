@@ -7,3 +7,4 @@ happy_alexandrie.alexandrie_controller_welcome:
     name: ''
   requirements:
     _permission: 'access alexandrie library'
+    _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
