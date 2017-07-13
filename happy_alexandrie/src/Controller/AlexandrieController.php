@@ -16,9 +16,26 @@ class AlexandrieController extends ControllerBase {
    *   The render array of the page.
    */
   public function helloWorld($name) {
-    return [
-      '#markup' => $this->t('Welcome @name into the Great Library', ['@name' => $name]),
+    $build = [];
+
+    $build['intro'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => $this->t('Welcome @name into the Great Library', ['@name' => $name]),
     ];
+
+    $config = $this->config('happy_alexandrie.library_config');
+    $params = [
+      '%opening' => $config->get('opening'),
+      '%closing' => $config->get('closing'),
+    ];
+    $build['schedule'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => $this->t('The library opens at %opening and closes at %closing.', $params),
+    ];
+
+    return $build;
   }
 
 }
