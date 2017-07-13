@@ -2,10 +2,13 @@
 
 namespace Drupal\happy_alexandrie\Form;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 class AlexandrieConfigForm extends ConfigFormBase {
+
+  const DATE_FORMAT = 'H:i';
 
   /**
    * {@inheritdoc}
@@ -26,15 +29,19 @@ class AlexandrieConfigForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('happy_alexandrie.library_config');
-    $form['opening'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Opening'),
-      '#default_value' => $config->get('opening'),
+    $defaults = [
+      '#type' => 'datetime',
+      '#date_date_element' => 'none',
+      '#date_time_element' => 'time',
+      '#date_increment' => 60,
     ];
-    $form['closing'] = [
-      '#type' => 'textfield',
+    $form['opening'] = $defaults + [
+      '#title' => $this->t('Opening'),
+      '#default_value' => DrupalDateTime::createFromFormat(self::DATE_FORMAT, $config->get('opening')),
+    ];
+    $form['closing'] = $defaults + [
       '#title' => $this->t('Closing'),
-      '#default_value' => $config->get('closing'),
+      '#default_value' => DrupalDateTime::createFromFormat(self::DATE_FORMAT, $config->get('closing')),
     ];
     return parent::buildForm($form, $form_state);
   }
@@ -46,8 +53,8 @@ class AlexandrieConfigForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->config('happy_alexandrie.library_config')
-      ->set('opening', $form_state->getValue('opening'))
-      ->set('closing', $form_state->getValue('closing'))
+      ->set('opening', $form_state->getValue('opening')->format(self::DATE_FORMAT))
+      ->set('closing', $form_state->getValue('closing')->format(self::DATE_FORMAT))
       ->save();
   }
 
