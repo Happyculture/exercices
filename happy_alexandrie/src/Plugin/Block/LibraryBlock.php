@@ -3,6 +3,7 @@
 namespace Drupal\happy_alexandrie\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
@@ -24,10 +25,38 @@ class LibraryBlock extends BlockBase {
     $build['link'] = [
       '#type' => 'link',
       '#url' => Url::fromRoute('happy_alexandrie.alexandrie_controller_welcome'),
-      '#title' => $this->t('Visit the library'),
+      '#title' => $this->configuration['link_title'],
     ];
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'link_title' => 'Visit the library',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['link_title'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Link title'),
+      '#default_value' => $this->configuration['link_title'],
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->setConfigurationValue('link_title', $form_state->getValue('link_title'));
   }
 
 }
