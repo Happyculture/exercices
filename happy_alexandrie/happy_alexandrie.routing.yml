@@ -6,4 +6,4 @@ happy_alexandrie.alexandrie_controller_welcome:
     _title: 'Welcome'
     name: ''
   requirements:
-    _user_is_logged_in: 'TRUE'
+    _permission: 'access alexandrie library'
