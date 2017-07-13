@@ -1,0 +1,11 @@
+
+happy_alexandrie.library_config:
+  type: config_object
+  label: 'Great Library settings'
+  mapping:
+    opening:
+      type: string
+      label: 'Library opening schedule (format: hh:mm)'
+    closing:
+      type: string
+      label: 'Library opening schedule (format: hh:mm)'
