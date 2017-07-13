@@ -38,4 +38,36 @@ class AlexandrieController extends ControllerBase {
     return $build;
   }
 
+  /**
+   * /books route callback.
+   *
+   * @return array
+   *   The render array of the page.
+   */
+  public function listBooks() {
+    // Get all the published books nids.
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'alexandrie_book')
+      ->condition('status', 1)
+      ->sort('created', 'DESC');
+    $nids = $query->execute();
+    if (empty($nids)) {
+      return [];
+    }
+
+    // Get the entity type manager service.
+    $entity_type_manager = \Drupal::entityTypeManager();
+
+    // Load the books nodes.
+    $storage = $entity_type_manager->getStorage('node');
+    $nodes = $storage->loadMultiple($nids);
+    if (empty($nodes)) {
+      return [];
+    }
+
+    // Prepare the books display render arrays.
+    $view_builder = $entity_type_manager->getViewBuilder('node');
+    return $view_builder->viewMultiple($nodes, 'list');
+  }
+
 }
