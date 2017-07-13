@@ -1,0 +1,8 @@
+
+happy_alexandrie.alexandrie_controller_welcome:
+  path: '/welcome'
+  defaults:
+    _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorld'
+    _title: 'Welcome'
+  requirements:
+    _user_is_logged_in: 'TRUE'
