@@ -6,5 +6,5 @@ happy_alexandrie.alexandrie_controller_welcome:
     _title: 'Welcome'
     name: ''
   requirements:
-    _permission: 'access alexandrie library'
+    _permission: 'access alexandrie library+administer alexandrie library'
     _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
