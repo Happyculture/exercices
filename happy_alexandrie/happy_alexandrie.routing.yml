@@ -10,13 +10,18 @@ happy_alexandrie.alexandrie_controller_welcome:
     _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
 
 happy_alexandrie.alexandrie_controller_books:
-  path: '/books'
+  path: '/books/{view_mode}'
   defaults:
     _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::listBooks'
     _title: 'Our books'
+    view_mode: 'node.teaser'
   requirements:
     _permission: 'access alexandrie library+administer alexandrie library'
     _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
+  options:
+    parameters:
+      view_mode:
+        type: entity:entity_view_mode
 
 happy_alexandrie.alexandrie_config_form:
   path: '/admin/config/system/library-info'

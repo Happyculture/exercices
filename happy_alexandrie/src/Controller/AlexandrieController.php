@@ -3,6 +3,7 @@
 namespace Drupal\happy_alexandrie\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityViewModeInterface;
 
 class AlexandrieController extends ControllerBase {
 
@@ -41,10 +42,13 @@ class AlexandrieController extends ControllerBase {
   /**
    * /books route callback.
    *
-   * @return array
+   * @param \Drupal\Core\Entity\EntityViewModeInterface $view_mode
+   *   the view mode to use to render books.
+   *
+   * @return array The render array of the page.
    *   The render array of the page.
    */
-  public function listBooks() {
+  public function listBooks(EntityViewModeInterface $view_mode) {
     // Get all the published books nids.
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'alexandrie_book')
@@ -65,9 +69,12 @@ class AlexandrieController extends ControllerBase {
       return [];
     }
 
+    // Extract the view mode name.
+    $view_mode_name = explode('.', $view_mode->id())[1];
+
     // Prepare the books display render arrays.
     $view_builder = $entity_type_manager->getViewBuilder('node');
-    return $view_builder->viewMultiple($nodes, 'list');
+    return $view_builder->viewMultiple($nodes, $view_mode_name);
   }
 
 }
