@@ -4,3 +4,10 @@ happy_alexandrie.tools.alexandrie_controller_welcome:
   description: 'Enter the Great Library'
   route_name: happy_alexandrie.alexandrie_controller_welcome
   menu_name: main
+
+happy_alexandrie.alexandrie_config_form:
+  title: 'Great Library settings'
+  description: 'Configure the Great Library'
+  route_name: happy_alexandrie.alexandrie_config_form
+  parent: system.admin_config_system
+  weight: 99

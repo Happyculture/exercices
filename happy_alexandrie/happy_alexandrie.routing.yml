@@ -8,3 +8,13 @@ happy_alexandrie.alexandrie_controller_welcome:
   requirements:
     _permission: 'access alexandrie library+administer alexandrie library'
     _custom_access: '\Drupal\happy_alexandrie\Access\AlexandrieAccess::accessLibrary'
+
+happy_alexandrie.alexandrie_config_form:
+  path: '/admin/config/system/library-info'
+  defaults:
+    _form: '\Drupal\happy_alexandrie\Form\AlexandrieConfigForm'
+    _title: 'Great Library settings'
+  requirements:
+    _permission: 'administer alexandrie library'
+  options:
+    _admin_route: TRUE
