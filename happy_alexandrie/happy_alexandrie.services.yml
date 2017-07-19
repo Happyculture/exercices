@@ -1,0 +1,3 @@
+services:
+  happy_alexandrie.get_cover:
+    class: Drupal\happy_alexandrie\Service\GetCoverOpenLibrary

@@ -4,6 +4,7 @@ namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\happy_alexandrie\Service\GetCoverServiceInterface;
 use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
 
 /**
@@ -72,12 +73,14 @@ class RemoteCover extends IsbnFormatter {
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
 
+    /** @var GetCoverServiceInterface $cover_service */
+    $cover_service = \Drupal::service('happy_alexandrie.get_cover');
+
     foreach ($items as $delta => $item) {
       $prop_name = $item->mainPropertyName();
       $elements[$delta] = [
         '#theme' => 'remote_cover',
-        '#isbn' => $item->{$prop_name},
-        '#size' => $this->getSetting('cover_size'),
+        '#url' => $cover_service->getCover($item->{$prop_name}, $this->getSetting('cover_size')),
         '#title' => $items->getEntity()->label(),
       ];
     }

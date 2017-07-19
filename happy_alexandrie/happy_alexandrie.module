@@ -12,8 +12,7 @@ function happy_alexandrie_theme($existing, $type, $theme, $path) {
   return [
     'remote_cover' => [
       'variables' => [
-        'isbn' => '',
-        'size' => 'L',
+        'url' => NULL,
         'title' => '',
       ],
     ],
@@ -27,11 +26,9 @@ function happy_alexandrie_theme($existing, $type, $theme, $path) {
  *
  * @param $variables
  *   An associative array containing:
- *   - isbn: the book ISBN.
- *   - size: the size of the cover. Should be S, M or L.
+ *   - url: the cover Url.
  *   - title: the book title.
  */
 function template_preprocess_remote_cover(&$variables) {
-  $variables['isbn'] = preg_replace('/[^0-9x]/i', '', $variables['isbn']);
-  $variables['size'] = strtoupper($variables['size']);
+  $variables['url'] = $variables['url']->toString();
 }
