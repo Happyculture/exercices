@@ -1,0 +1,5 @@
+name: ISBN
+type: module
+description: 'Defines an ISBN field type.'
+package: Field types
+core: 8.x
