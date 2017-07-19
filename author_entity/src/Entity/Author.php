@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\RevisionableContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
 use Drupal\user\UserInterface;
 
 /**
@@ -53,7 +54,7 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/admin/content/author/{author}",
+ *     "canonical" = "/author/{author}",
  *     "add-page" = "/admin/content/author/add",
  *     "add-form" = "/admin/content/author/add/{author_type}",
  *     "edit-form" = "/admin/content/author/{author}/edit",
@@ -213,7 +214,7 @@ class Author extends RevisionableContentEntityBase implements AuthorInterface {
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Author entity.'))
+      ->setDescription(t('The name of the author.'))
       ->setRevisionable(TRUE)
       ->setSettings([
         'max_length' => 50,
@@ -252,6 +253,84 @@ class Author extends RevisionableContentEntityBase implements AuthorInterface {
       ->setReadOnly(TRUE)
       ->setRevisionable(TRUE)
       ->setTranslatable(TRUE);
+
+    $fields['nickname'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Nickname'))
+      ->setDescription(t('The nickname of the author.'))
+      ->setRevisionable(TRUE)
+      ->setSettings([
+        'max_length' => 50,
+        'text_processing' => 0,
+      ])
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['birthdate'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Birth date'))
+      ->setDescription(t('The date of birth of the author.'))
+      ->setSettings([
+        'datetime_type' => DateTimeItem::DATETIME_TYPE_DATE,
+      ])
+      ->setRequired(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'datetime_default',
+        'weight' => 1,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'datetime_default',
+        'weight' => 1,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['deathdate'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Death date'))
+      ->setDescription(t('The date of death of the author.'))
+      ->setSettings([
+        'datetime_type' => DateTimeItem::DATETIME_TYPE_DATE,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'datetime_default',
+        'weight' => 2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'datetime_default',
+        'weight' => 2,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['picture'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Picture'))
+      ->setDescription(t('The picture of the author.'))
+      ->setSettings([
+        'alt_field' => 1,
+        'alt_field_required' => 0,
+        'file_directory' => 'authors',
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'image',
+        'weight' => -1,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'image_image',
+        'weight' => -1,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

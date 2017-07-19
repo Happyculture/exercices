@@ -21,3 +21,7 @@ entity.author.delete_form:
   title: Delete
   weight: 10
 
+entity.author.collection:
+  route_name: entity.author.collection
+  base_route: system.admin_content
+  title: 'Authors'
