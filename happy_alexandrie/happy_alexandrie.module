@@ -5,6 +5,10 @@
  * Contains happy_alexandrie.module..
  */
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -31,4 +35,65 @@ function happy_alexandrie_theme($existing, $type, $theme, $path) {
  */
 function template_preprocess_remote_cover(&$variables) {
   $variables['url'] = $variables['url']->toString();
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function happy_alexandrie_entity_extra_field_info() {
+  $extra['node']['alexandrie_book']['display']['generated'] = [
+    'label' => t('Generated date'),
+    'weight' => 0,
+    'visible' => FALSE,
+  ];
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function happy_alexandrie_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() === 'alexandrie_book' && $display->getComponent('generated')) {
+    // Get the request time and format it.
+    $request_time = \Drupal::time()->getRequestTime();
+    $formatted_date = \Drupal::service('date.formatter')->format($request_time, 'custom', 'd/m/Y H:i:s');
+
+    // Prepare the cache metadata.
+    $cache = [
+      'tags' => Cache::mergeTags(['books:generated'], $entity->getCacheTags()),
+    ];
+
+    // Prepare the render array to mimic a core field render.
+    $build['generated'] = [
+      '#theme' => 'field',
+      '#title' => t('Generated on'),
+      '#label_display' => 'inline',
+      '#view_mode' => '_custom', // Avoids an issue with quickedit.
+      '#language' => $entity->language()->getId(),
+      '#field_name' => 'extra-generated',
+      '#field_type' => 'datetime',
+      '#field_translatable' => FALSE,
+      '#entity_type' => $entity->getEntityTypeId(),
+      '#bundle' => $entity->bundle(),
+      '#object' => $entity,
+      '#is_multiple' => FALSE,
+      0 => [
+        '#markup' => $formatted_date,
+      ],
+      '#cache' => $cache,
+    ];
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function happy_alexandrie_cron() {
+  $request_time = \Drupal::time()->getRequestTime();
+
+  // Ensure the cron hasn't run for the last 30 seconds.
+  if (\Drupal::state()->get('happy_alexandrie_generated_cleanup', 0) < $request_time - 30) {
+    Cache::invalidateTags(['books:generated']);
+    \Drupal::state()->set('happy_alexandrie_generated_cleanup', $request_time);
+  }
 }
