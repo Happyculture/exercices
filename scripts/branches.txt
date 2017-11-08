@@ -14,11 +14,11 @@
 2.5.1_block_config
 2.6.0_entity_list
 2.6.1_entity_list_view_mode
+2.6.2_entity_author
 2.7.0_field_type
 2.7.1_isbn_validation
 2.8.0_theme_remote_cover
 2.8.1_remote_cover_settings
 2.9.0_service
 2.10.0_dependency_injection
-2.11.0_entity_type
-2.12.0_cache
+2.11.0_cache
