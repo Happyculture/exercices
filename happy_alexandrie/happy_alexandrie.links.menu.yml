@@ -1,0 +1,5 @@
+happy_alexandrie.tools.alexandrie_controller_welcome:
+  title: 'Great Library'
+  description: 'Enter the Great Library'
+  route_name: happy_alexandrie.alexandrie_controller_welcome
+  menu_name: main
