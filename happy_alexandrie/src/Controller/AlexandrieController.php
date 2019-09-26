@@ -18,4 +18,18 @@ class AlexandrieController extends ControllerBase {
     ];
   }
 
+  /**
+   * /welcome/name route callback.
+   *
+   * @param string $name
+   *   The name of the visitor to show.
+   *
+   * @return array
+   *   The render array of the page.
+   */
+  public function helloWorldParam($name) {
+    return [
+      '#markup' => $this->t('Welcome @name into the Great Library', ['@name' => $name]),
+    ];
+  }
 }

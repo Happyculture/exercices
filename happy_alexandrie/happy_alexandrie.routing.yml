@@ -6,3 +6,11 @@ happy_alexandrie.alexandrie_controller_welcome:
     _title: 'Welcome'
   requirements:
     _user_is_logged_in: 'TRUE'
+happy_alexandrie.alexandrie_controller_welcome_param:
+  path: '/welcome/{name}'
+  defaults:
+    _controller: '\Drupal\happy_alexandrie\Controller\AlexandrieController::helloWorldParam'
+    _title: 'Welcome'
+    name: ''
+  requirements:
+    _user_is_logged_in: 'TRUE'
