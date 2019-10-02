@@ -5,7 +5,7 @@ namespace Drupal\happy_alexandrie\Plugin\Field\FieldType;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\Core\TypedData\DataReferenceTargetDefinition;
+use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Author and role field type.
@@ -43,7 +43,7 @@ class AuthorRole extends EntityReferenceItem {
     $properties = parent::propertyDefinitions($field_storage_definition);
 
     // Add the role property to the current definition of the entity reference.
-    $properties['role'] = DataReferenceTargetDefinition::create('string')
+    $properties['role'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Author role'))
       ->setRequired(TRUE);
     return $properties;
