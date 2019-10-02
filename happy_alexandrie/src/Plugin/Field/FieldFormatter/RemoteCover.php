@@ -3,6 +3,7 @@
 namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Field\FormatterBase;
 use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
 
 /**
@@ -12,11 +13,11 @@ use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
  *   id = "remote_cover",
  *   label = @Translation("Remote cover"),
  *   field_types = {
- *     "isbn"
+ *     "string"
  *   }
  * )
  */
-class RemoteCover extends IsbnFormatter {
+class RemoteCover extends FormatterBase {
 
   /**
    * {@inheritdoc}
@@ -25,10 +26,9 @@ class RemoteCover extends IsbnFormatter {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $prop_name = $item->mainPropertyName();
       $elements[$delta] = [
         '#theme' => 'remote_cover',
-        '#isbn' => $item->{$prop_name},
+        '#isbn' => $item->value,
         '#title' => $items->getEntity()->label(),
       ];
     }
