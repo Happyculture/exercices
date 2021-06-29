@@ -3,8 +3,8 @@
 namespace Drupal\happy_alexandrie\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FormatterBase;
-use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\Plugin\Field\FieldFormatter\StringFormatter;
 
 /**
  * Plugin implementation of the 'remote_cover' formatter.
@@ -17,7 +17,7 @@ use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
  *   }
  * )
  */
-class RemoteCover extends FormatterBase {
+class RemoteCover extends StringFormatter {
 
   /**
    * {@inheritdoc}
