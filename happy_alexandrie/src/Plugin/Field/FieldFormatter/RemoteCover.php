@@ -6,7 +6,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\happy_alexandrie\Service\GetCoverServiceInterface;
-use Drupal\isbn\Plugin\Field\FieldFormatter\IsbnFormatter;
+use Drupal\Core\Field\Plugin\Field\FieldFormatter\StringFormatter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -16,11 +16,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "remote_cover",
  *   label = @Translation("Remote cover"),
  *   field_types = {
- *     "isbn"
+ *     "string"
  *   }
  * )
  */
-class RemoteCover extends IsbnFormatter implements ContainerFactoryPluginInterface {
+class RemoteCover extends StringFormatter { implements ContainerFactoryPluginInterface {
 
   /**
    * @var \Drupal\happy_alexandrie\Service\GetCoverServiceInterface
