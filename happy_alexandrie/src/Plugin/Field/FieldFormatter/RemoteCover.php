@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   }
  * )
  */
-class RemoteCover extends StringFormatter { implements ContainerFactoryPluginInterface {
+class RemoteCover extends StringFormatter implements ContainerFactoryPluginInterface {
 
   /**
    * @var \Drupal\happy_alexandrie\Service\GetCoverServiceInterface
